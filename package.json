@@ -1,0 +1,23 @@
+{
+  "name": "leetcode-js",
+  "version": "1.0.0",
+  "description": "💪💪💪 Fight with algorithm",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wozien/leetcode-js.git"
+  },
+  "keywords": [],
+  "author": "GitLab CI <ecloud@inspur.com> (https://git.iec.io)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wozien/leetcode-js/issues"
+  },
+  "homepage": "https://github.com/wozien/leetcode-js#readme",
+  "dependencies": {
+    "jest": "^27.2.5"
+  }
+}

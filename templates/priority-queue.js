@@ -40,7 +40,7 @@ class PriorityQueue {
 
     _swim(ch) {
         while (ch > 1) {
-            const pt = Math.floor(ch / 2)
+            const pt = ch >> 1   // 等于 Math.floor(ch / 2) 或者 ch / 2 | 0
             if (!this._shouldSwap(pt, ch)) break
             this._swap(pt, ch)
             ch = pt

@@ -1,30 +1,17 @@
-var findTargetSumWays = function(nums, target) {
-    if(nums.length === 0) return 0
-    let sum = nums.reduce((pre, cur) => pre + cur)
-    if(sum < target || (sum + target) % 2) return 0
+var maxProfit = function(prices) {
+    let n = prices.length
+    let dp = Array(n).fill().map(() => Array(3).fill().map(() => Array(2)))
+    dp[0][1][0] = 0, dp[0][1][1] = -prices[0]
+    dp[0][2][0] = 0, dp[0][2][1] = -prices[0]
 
-    // 背包问题求子集
-    function subsets(nums, sum) {
-        let n = nums.length
-        // dp[i][j] 表示前i数中的合为sum的总数
-        let dp = Array(n + 1).fill().map(() => Array(sum + 1).fill(0))
-
-        for(let i = 0; i <= n; i++) dp[i][0] = 1
-
-        for(let i = 1; i <=n ; i++) {
-            for(let j = 0; j <= sum; j++) {
-                if(j >= nums[i-1]) {
-                    dp[i][j] = dp[i-1][j] + dp[i-1][j - nums[i-1]]
-                } else {
-                    dp[i][j] = dp[i-1][j] 
-                }
-                
-            }
+    for(let i = 1; i< n; i++) {
+        for(let k = 2; k >= 1; k--) {
+            dp[i][k][0] = Math.max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i])
+            dp[i][k][1] = Math.max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i])
         }
-        return dp[n][sum]
     }
 
-    return subsets(nums, (sum + target) / 2)
+    return dp[n-1][2][0]
 };
 
-findTargetSumWays([0, 1], 1)
+maxProfit([1,2,3,4,5])

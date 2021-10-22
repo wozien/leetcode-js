@@ -1,17 +1,28 @@
-var maxProfit = function(prices) {
-    let n = prices.length
-    let dp = Array(n).fill().map(() => Array(3).fill().map(() => Array(2)))
-    dp[0][1][0] = 0, dp[0][1][1] = -prices[0]
-    dp[0][2][0] = 0, dp[0][2][1] = -prices[0]
+var checkInclusion = function(s1, s2) {
+    let len1 = s1.length, len2 = s2.length
+    if(len1 > len2) return false
+    let need = {}, win = {}
+    let left = right = 0, valid = 0
 
-    for(let i = 1; i< n; i++) {
-        for(let k = 2; k >= 1; k--) {
-            dp[i][k][0] = Math.max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i])
-            dp[i][k][1] = Math.max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i])
+    for(let c of s1) need[c] = (need[c] || 0) + 1
+    let size = Object.keys(need).length
+
+    while(right < len2) {
+        let c = s2[right]
+        right++
+        win[c] = (win[c] || 0) + 1
+        if(need[c] && win[c] === need[c]) valid++
+
+        while(valid === size) {
+            if((right - left) === len1) return true
+            c = s1[left]
+            left++
+            if(need[c] && win[c] === need[c]) valid--
+            win[c]--
         }
     }
 
-    return dp[n-1][2][0]
+    return false
 };
 
-maxProfit([1,2,3,4,5])
+checkInclusion('ab', 'eidbaooo')

@@ -1,7 +1,8 @@
 /*
  * @lc app=leetcode.cn id=51 lang=javascript
  *
- * [51] N 皇后
+ * [51] N 皇后 
+ * dfs 回溯
  */
 
 // @lc code=start
